@@ -39,6 +39,21 @@
 
             if (!(e instanceof Array)) {
                 r += kv(k, e.value);
+                var res = e.value;
+
+                $.ajax({
+                    url: 'https://api.particle.io/v1/devices/350048000647343339373536/led?access_token=46c0617909cfafe94c6d8cd52eefd341741346ef',
+                    data: { res:res},
+                    type: 'post',
+                    dataType: "json",
+                    success: function(output) {
+                        alert(res);
+                    },
+                    error: function(xhr, textStatus, errorThrown){
+                        alert("fallo");
+                    }
+                });
+
             } else {
                 for (var i = 0; i < e.length; i++) {
                     r += kv(k, e[i].value);
@@ -47,6 +62,7 @@
         }
 
         document.getElementById("result").innerHTML = r;
+
     };
     mic.onerror = function (err) {
         error("Error: " + err);
@@ -58,7 +74,7 @@
         info("Microphone is not connected");
     };
 
-    mic.connect("LQINRQDDA6RM2HHKMM3NQMGUNLFPF4X4");
+    mic.connect("LT7P4N6BWTY373CVXSVZTP26U3BDKNO6");
     // mic.start();
     // mic.stop();
 
